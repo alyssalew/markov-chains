@@ -21,7 +21,6 @@ def open_and_read_file(file_path):
 
 
 
-
 def make_chains(text_string):
     """Take input text as string; return dictionary of Markov chains.
 
@@ -42,9 +41,6 @@ def make_chains(text_string):
 
         >>> chains[('hi', 'there')]
         ['mary', 'juanita']
-
-        >>> chains[('there','juanita')]
-        [None]
     """
     chains = {}
     # Put str into list
@@ -53,6 +49,12 @@ def make_chains(text_string):
     #iterate over words
     for index in range(len(words)):
         if index <= len(words)-3:  # Make sure there is enough words to create values
+    # Put str into liist
+        words = text_string.split()
+        print words
+    #iterate over words
+    for index in range(len(words)):
+        if index <= len(words)-2:
             pair_word1 = words[index]
             pair_word2 = words[index + 1]
     #     #add two words to a tuple
@@ -67,6 +69,7 @@ def make_chains(text_string):
                 chains[words_in_tuple] = [next_word]
     print chains
     return chains
+
 
 def make_text(chains):
     """Return text from chains."""
