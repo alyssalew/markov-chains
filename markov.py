@@ -10,10 +10,7 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    # your code goes here
-
     our_file = open(file_path)
-    #print our_file.read()
     return our_file.read()
 
 
@@ -41,8 +38,6 @@ def make_chains(text_string):
     chains = {}
 
     words = text_string.split()  # Put str into liist
-    print words
-    print
 
     #iterate over words
     for index in range(len(words)):
@@ -58,13 +53,11 @@ def make_chains(text_string):
             next_word = words[index + 2]
             # check if words_in_tuple in dictionary:
             if words_in_tuple in chains:
-            # if it is: update the value:
+            # if it is: update the value
                 chains[words_in_tuple].append(next_word)
             # if not create new key-value pair
             else:
                 chains[words_in_tuple] = [next_word]
-    print chains
-    print
     return chains
 
 
@@ -73,34 +66,27 @@ def make_text(chains):
 
     our_words = []
 
-    # your code goes here
-
     # Make a link (tuple --> random word in connected words list)
-    #current_pair = ('ham?', 'Would')
-
     # Get the initial state (beginning bi-gram)
-    bigrams = chains.keys() # List of all possible bi-grmas from text
-    current_pair = choice(bigrams) # Choose random bi-gram to start
-    print current_pair
-    our_words.extend(current_pair) # Add to list
+    bigrams = chains.keys()  # List of all possible bi-grmas from text
+    current_pair = choice(bigrams)  # Choose random bi-gram to start
+    our_words.extend(current_pair)  # Add to list
 
     # Continue to make links until reach end of text
-    while chains.get(current_pair) is not None: # While there is still a tuple to get
-        link_list = chains[current_pair] # List of words linked to current bi-gram
-        print link_list
-        # Use random.choice(link_list)
-        chosen_word = choice(link_list) # Choose word from list of linked words
-        print chosen_word
+    while chains.get(current_pair) is not None:  # While there is still a tuple to get
+        link_list = chains[current_pair]  # List of words linked to current bi-gram
+        
+        # Choose word from list of linked words
+        chosen_word = choice(link_list)
+        
         # Add words to list to create semi-random text
         our_words.append(chosen_word)
 
         # Make a new key
         new_pair = (current_pair[1], chosen_word)
-        print new_pair
         current_pair = new_pair
-        # ..... Repeat
 
-        print our_words
+        # ..... Repeat
 
     return " ".join(our_words)
 
