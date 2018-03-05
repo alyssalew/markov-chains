@@ -15,7 +15,6 @@ def open_and_read_file(file_path):
     our_file = open(file_path)
     #print our_file.read()
     return our_file.read()
-    #string_of_file = str(file_path)
 
 
 
@@ -43,28 +42,28 @@ def make_chains(text_string):
         ['mary', 'juanita']
     """
     chains = {}
-    # Put str into list
-    words = text_string.split()
+
+    words = text_string.split()  # Put str into liist
+    print words
+    print
 
     #iterate over words
     for index in range(len(words)):
         if index <= len(words)-3:  # Make sure there is enough words to create values
-    # Put str into liist
-        words = text_string.split()
-        print words
-    #iterate over words
-    for index in range(len(words)):
-        if index <= len(words)-2:
+            
+            # get the words for bi-gram
             pair_word1 = words[index]
             pair_word2 = words[index + 1]
-    #     #add two words to a tuple
+            
+            # add two words to a tuple
             words_in_tuple = (pair_word1, pair_word2)
+            
             next_word = words[index + 2]
             # check if words_in_tuple in dictionary:
             if words_in_tuple in chains:
             # if it is: update the value:
                 chains[words_in_tuple].append(next_word)
-            # create new key-value pair
+            # if not create new key-value pair
             else:
                 chains[words_in_tuple] = [next_word]
     print chains
