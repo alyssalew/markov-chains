@@ -17,9 +17,6 @@ def open_and_read_file(file_path):
     return our_file.read()
 
 
-
-
-
 def make_chains(text_string):
     """Take input text as string; return dictionary of Markov chains.
 
@@ -67,17 +64,45 @@ def make_chains(text_string):
             else:
                 chains[words_in_tuple] = [next_word]
     print chains
+    print
     return chains
 
 
 def make_text(chains):
     """Return text from chains."""
 
-    words = []
+    our_words = []
 
     # your code goes here
 
-    return " ".join(words)
+    # Make a link (tuple --> random word in connected words list)
+    #current_pair = ('ham?', 'Would')
+
+    # Get the initial state (beginning bi-gram)
+    bigrams = chains.keys() # List of all possible bi-grmas from text
+    current_pair = choice(bigrams) # Choose random bi-gram to start
+    print current_pair
+    our_words.extend(current_pair) # Add to list
+
+    # Continue to make links until reach end of text
+    while chains.get(current_pair) is not None: # While there is still a tuple to get
+        link_list = chains[current_pair] # List of words linked to current bi-gram
+        print link_list
+        # Use random.choice(link_list)
+        chosen_word = choice(link_list) # Choose word from list of linked words
+        print chosen_word
+        # Add words to list to create semi-random text
+        our_words.append(chosen_word)
+
+        # Make a new key
+        new_pair = (current_pair[1], chosen_word)
+        print new_pair
+        current_pair = new_pair
+        # ..... Repeat
+
+        print our_words
+
+    return " ".join(our_words)
 
 
 input_path = "green-eggs.txt"
